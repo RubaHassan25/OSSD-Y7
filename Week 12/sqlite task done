@@ -1,0 +1,24 @@
+import sqlite3
+
+con = sqlite3.connect("project.db")
+cursor = con.cursor()
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS students (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        age INTEGER,
+        grade TEXT
+    )
+""")
+
+cursor.execute("INSERT INTO students (name, age, grade) VALUES ('Ruba', 20, 'A')")
+cursor.execute("INSERT INTO students (name, age, grade) VALUES ('Maryum', 21, 'B+')")
+cursor.execute("INSERT INTO students (name, age, grade) VALUES ('Rubaba', 19, 'A-')")
+
+con.commit()
+
+cursor.execute("SELECT * FROM students")
+print(cursor.fetchall())
+
+con.close()
